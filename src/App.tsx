@@ -25,7 +25,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Layout>
-            <div className="min-h-full pb-16 md:pb-0">
+            <Navigation />
+            <div className="min-h-full">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/categories" element={<Categories />} />
@@ -36,7 +37,6 @@ const App = () => (
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              <Navigation />
             </div>
           </Layout>
         </BrowserRouter>
