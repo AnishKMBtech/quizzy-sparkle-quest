@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import ChatBot from "./ChatBot";
 
 interface LayoutProps {
   children: ReactNode;
@@ -33,9 +34,12 @@ const Layout = ({ children }: LayoutProps) => {
       />
       
       {/* Content container */}
-      <div className="relative w-[80%] h-[90vh] mx-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-2xl rounded-xl overflow-auto">
+      <div className="relative w-full md:w-[80%] h-[90vh] mx-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-2xl rounded-xl overflow-auto">
         {children}
       </div>
+
+      {/* ChatBot */}
+      <ChatBot />
     </div>
   );
 };
