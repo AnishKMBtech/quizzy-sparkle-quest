@@ -8,15 +8,17 @@ const mockLeaderboard = [
 
 const Leaderboard = () => {
   return (
-    <div className="min-h-screen bg-gray-50 animate-fade-in">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Leaderboard</h1>
+    <div className="container mx-auto px-4 pt-24 pb-8 animate-fade-in">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
+          Leaderboard
+        </h1>
 
-        <div className="max-w-2xl mx-auto">
+        <div className="space-y-4">
           {mockLeaderboard.map((user) => (
             <div
               key={user.id}
-              className={`bg-white rounded-xl shadow-md p-6 mb-4 flex items-center ${
+              className={`bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-xl shadow-md p-6 flex items-center ${
                 user.rank <= 3 ? "border-l-4" : ""
               } ${
                 user.rank === 1
@@ -32,18 +34,18 @@ const Leaderboard = () => {
                 {user.avatar}
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold">{user.name}</h3>
-                <p className="text-sm text-gray-500">{user.points} points</p>
+                <h3 className="font-semibold text-foreground">{user.name}</h3>
+                <p className="text-sm text-muted-foreground">{user.points} points</p>
               </div>
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
                   user.rank === 1
-                    ? "bg-yellow-100 text-yellow-600"
+                    ? "bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-400"
                     : user.rank === 2
-                    ? "bg-gray-100 text-gray-600"
+                    ? "bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400"
                     : user.rank === 3
-                    ? "bg-orange-100 text-orange-600"
-                    : "bg-gray-50 text-gray-600"
+                    ? "bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400"
+                    : "bg-white/50 dark:bg-gray-800/50 text-muted-foreground"
                 }`}
               >
                 {user.rank}
