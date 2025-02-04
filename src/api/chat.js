@@ -1,28 +1,26 @@
-import Groq from "groq-sdk";
-
-const groq = new Groq({
-  apiKey: import.meta.env.VITE_GROQ_API_KEY
-});
-
 export async function handleChatMessage(message) {
   try {
-    console.log("Sending message to Groq API:", message);
+    console.log("Sending message to chat endpoint:", message);
     
-    const chatCompletion = await groq.chat.completions.create({
-      messages: [
-        {
-          role: "user",
-          content: message,
-        },
-      ],
-      model: "llama-3.3-70b-versatile",
+    const response = await fetch('https://uhbhwuczdtuykmeythsq.supabase.co/functions/v1/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ message })
     });
 
-    console.log("Received response from Groq API:", chatCompletion);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Received response from chat endpoint:", data);
     
-    return chatCompletion.choices[0]?.message?.content || "I'm not sure how to respond to that.";
+    return data.response || "I'm not sure how to respond to that.";
   } catch (error) {
-    console.error("Groq API error:", error);
+    console.error("Chat endpoint error:", error);
     throw new Error("Failed to get response from chat API");
   }
 }
