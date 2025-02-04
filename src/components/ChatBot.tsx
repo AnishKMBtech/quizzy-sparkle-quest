@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { MessageCircle, X } from "lucide-react";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
+import { handleChatMessage } from "../api/chat.js";
 
 interface Message {
   role: "user" | "assistant";
@@ -24,14 +25,8 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
-      });
-
-      const data = await response.json();
-      setMessages(prev => [...prev, { role: "assistant", content: data.message }]);
+      const response = await handleChatMessage(input);
+      setMessages(prev => [...prev, { role: "assistant", content: response }]);
     } catch (error) {
       console.error("Chat error:", error);
       setMessages(prev => [...prev, { 
