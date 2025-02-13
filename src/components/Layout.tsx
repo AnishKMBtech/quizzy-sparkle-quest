@@ -1,3 +1,4 @@
+
 import { ReactNode } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Button
         variant="outline"
         size="icon"
-        className="fixed top-4 right-4 z-50 bg-white/50 backdrop-blur-sm"
+        className="fixed top-4 right-4 z-50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -27,9 +28,9 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Animated gradient background */}
       <div 
-        className="absolute inset-0 animate-gradient bg-[length:400%_400%]"
+        className="absolute inset-0 animate-gradient bg-[length:400%_400%] transition-colors duration-300"
         style={{
-          backgroundImage: "linear-gradient(225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",
+          backgroundImage: "linear-gradient(225deg, var(--gradient-start) 0%, var(--gradient-middle) 48%, var(--gradient-end) 100%)",
         }}
       />
       
